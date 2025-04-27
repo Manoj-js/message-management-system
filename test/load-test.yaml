@@ -1,0 +1,31 @@
+config:
+  target: 'http://localhost:4000'
+  phases:
+    - duration: 60
+      arrivalRate: 100
+  defaults:
+    headers:
+      accept: 'application/json'
+      x-tenant-id: '1234'
+      Content-Type: 'application/json'
+      Authorization: 'Bearer valid-token'
+
+scenarios:
+  - name: 'Search messages'
+    weight: 50
+    flow:
+      - get:
+          url: '/v1/api/conversations/123e4567-e89b-12d3-a456-426614174000/messages/search?page=1&limit=10&sortField=timestamp&sortDirection=desc&q=important'
+
+  - name: 'Create message'
+    weight: 50
+    flow:
+      - post:
+          url: '/v1/api/messages'
+          json:
+            conversationId: '123e4567-e89b-12d3-a456-426614174000'
+            senderId: '123e4567-e89b-12d3-a456-426614174001'
+            content: 'Hello, world!'
+            metadata:
+              important: true
+              category: 'greeting'
