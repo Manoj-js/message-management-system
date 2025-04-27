@@ -28,7 +28,7 @@ This system provides RESTful APIs for message management with full-text search c
 
 ```bash
 # Clone the repository
-git clone [repository-url]
+git clone https://github.com/Manoj-js/message-management-system
 
 # Install dependencies
 npm install
